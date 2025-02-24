@@ -1,4 +1,392 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[documentation]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>lib/media/favicon.png</url><title>documentation</title><link></link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Mon, 24 Feb 2025 03:12:38 GMT</lastBuildDate><atom:link href="lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Mon, 24 Feb 2025 03:12:36 GMT</pubDate><ttl>60</ttl><dc:creator></dc:creator><item><title><![CDATA[Inventory GUI]]></title><description><![CDATA[ 
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[documentation]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>lib/media/favicon.png</url><title>documentation</title><link/></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Mon, 24 Feb 2025 17:26:45 GMT</lastBuildDate><atom:link href="lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Mon, 24 Feb 2025 17:26:44 GMT</pubDate><ttl>60</ttl><dc:creator/><item><title><![CDATA[Animation Manager]]></title><description><![CDATA[ 
+ <br><br>The AnimationManager class is a node that manages animations through an AnimationTree. It provides an interface for playing repeating and one-shot animations, handling animation transitions, and checking animation states.<br><br><br>
+<br>Emitted when an animation completes.
+<br><br><br>
+<br>Defines available animations:
+
+<br>IDLE, WALK, ATTACK, POSE, BIRD, PROUD, THINKING, BUCKET, QUESTION, STEER, CHEER, ROLL
+
+
+<br>Note
+More animations can be added to this script. These are default override values
+<br><br><br>
+<br>Maps repeating animations to their respective animation names.
+<br>These animations loop continuously.
+<br><br>
+<br>Maps one-shot animations to their respective animation names.
+<br>These animations play once and then stop.
+<br><br>
+<br>AnimationTree path for handling repeating animations.
+<br><br>
+<br>Format string for setting one-shot animation requests in the AnimationTree.
+<br><br><br>
+<br>The AnimationTree instance controlling animations.
+<br><br><br>
+<br>Ensures anim_tree is assigned.
+<br>Connects animation_finished signal from the AnimationTree.
+<br><br>
+<br>Emits the animation_finished signal when an animation completes.
+<br><br>
+<br>Sets the requested repeating animation in the AnimationTree.
+<br><br>
+<br>Sets the requested one-shot animation in the AnimationTree.
+<br><br>
+<br>Handles both repeating and one-shot animations based on the provided animation.
+<br>Logs a warning if the animation type is unknown.
+<br><br>
+<br>Checks if a one-shot animation is currently playing.
+<br>Returns true if the animation is active, otherwise false.
+<br><br>
+<br>Assign an AnimationTree node to anim_tree.
+<br>Call handle_animations(anim) with an Animations enum value to play an animation.
+<br>Use is_playing(anim) to check if a one-shot animation is still active.
+<br>Connect to the animation_finished signal to respond to completed animations.
+<br>This class provides a structured way to manage animations efficiently within a Godot 4 project.<br>]]></description><link>features/animation-manager.html</link><guid isPermaLink="false">Features/Animation Manager.md</guid><pubDate>Mon, 24 Feb 2025 17:22:01 GMT</pubDate></item><item><title><![CDATA[Dialogue Player]]></title><description><![CDATA[ 
+ <br><br>The DialoguePlayer is a Godot 4 class that manages dialogue systems in games. It extends the CanvasLayer node and provides functionality for displaying character dialogue with text animation, character nameplate customisation, and signal-based camera and pose management.<br><br><br>
+<br>scene_text_file (String): Path to JSON file containing scene dialogue text
+<br>character_json_file (String): Path to JSON file containing character information
+<br><br>
+<br>selected_text (Array): Array of dialogue lines for current conversation
+<br>in_progress (bool): Tracks if dialogue is currently being displayed
+<br>text_animating (bool): Tracks if text animation is in progress
+<br>should_reveal_text (bool): Flag to control instant text revelation
+<br>content: Parsed content from scene text JSON file
+<br>character_content: Parsed content from character JSON file
+<br>current_dialogue: Currently active dialogue data
+<br>current_character: Currently active character data
+<br><br>
+<br>dialogue_box (TextureRect): Main dialogue box container
+<br>dialogue_textbox (RichTextLabel): Text display for dialogue
+<br>dialogue_nameplate (TextureRect): Character name display container
+<br>name_textbox (RichTextLabel): Text display for character name
+<br>text_sound (AudioStreamPlayer): Audio player for text animation sounds
+<br><br>
+<br>change_cam(camera: String): Emitted when camera change is requested
+<br>change_pose(character: String, pose: String): Emitted when character pose change is requested
+<br>finished: Emitted when dialogue sequence completes
+<br><br><br>func _ready() -&gt; void
+func load_scene_text() -&gt; void
+<br>
+<br>_ready(): Initializes the dialogue system by hiding the dialogue box and loading text files
+<br>load_scene_text(): Loads and parses the JSON files for scene text and character data
+<br><br>func on_display_dialog(text_key) -&gt; void
+func show_text() -&gt; void
+func reveal_text() -&gt; void
+func next_line() -&gt; void
+func finish() -&gt; void
+<br>
+<br>on_display_dialog(text_key): Main entry point for displaying dialogue. Takes a text key to look up dialogue in JSON
+<br>show_text(): Handles text display animation and processing of camera/pose commands
+<br>reveal_text(): Instantly reveals all text in the current dialogue box
+<br>next_line(): Advances to the next line of dialogue
+<br>finish(): Cleans up current dialogue and either ends or moves to next dialogue sequence
+<br><br><br>The system supports special commands embedded in dialogue text:<br>
+<br>Camera Commands: !(camera_command)!
+
+<br>Triggers camera changes via the change_cam signal
+
+
+<br>Pose Commands: &lt;(pose_command)&gt;
+
+<br>Triggers character pose changes via the change_pose signal
+
+
+<br><br>
+<br>Characters appear progressively with a 0.02-second delay
+<br>Sound effects play every 3 characters
+<br>Can be skipped by player input to show full text immediately
+<br><br><br>{
+    "dialogue_key": {
+        "character": "character_id",
+        "text": ["array", "of", "dialogue", "lines"],
+        "next": "next_dialogue_key"
+    }
+}
+<br><br>{
+    "character_id": {
+        "name": "Character Name",
+        "nameplate_color": "color_value"
+    }
+}
+<br><br># Initialize dialogue
+dialogue_player.on_display_dialog("opening_scene")
+
+# Handle dialogue advancement
+# Called when player provides input
+if Input.is_action_just_pressed("advance_dialogue"):
+    dialogue_player.on_display_dialog("current_key")
+<br>Note
+
+<br>Text animation can be interrupted by player input
+<br>The system automatically handles transitions between dialogue sequences using the "next" field
+<br>Camera and pose commands are automatically stripped from displayed text
+<br>The dialogue system maintains state to track progress through conversations
+
+]]></description><link>features/dialogue-player.html</link><guid isPermaLink="false">Features/Dialogue Player.md</guid><pubDate>Mon, 24 Feb 2025 17:21:33 GMT</pubDate></item><item><title><![CDATA[Inventory Component]]></title><description><![CDATA[ 
+ <br><br>The InventoryComponent is a node that manages an inventory system. It supports stackable, unstackable, and equipable items. The inventory can be global, meaning it is shared across all instances, or local to the specific node.<br><br>
+<br>Supports global and local inventories.
+<br>Handles stackable, unstackable, and equipable items.
+<br>Provides signals for inventory updates.
+<br>Automatically merges global inventories when needed.
+<br><br><br>Determines if this inventory is global. If true, it shares items with all other instances marked as global.<br><br>A shared inventory dictionary for all global instances.<br><br>The inventory dictionary that holds items. If global is enabled, it returns the global_inventory.<br><br><br>Emitted whenever the inventory is updated.<br><br><br>Initializes the inventory. If global, it merges with the shared global_inventory.<br><br>Syncs the local inventory with the global inventory.<br><br>Triggers the updated signal to notify other nodes of inventory changes.<br><br>Adds an item to the inventory based on its type:<br>Info
+To learn more, check out <a data-href="Inventory Item" href="custom-nodes-&amp;-utility-classes/inventory-item.html" class="internal-link" target="_self" rel="noopener nofollow">Inventory Item</a>
+<br><br>
+<br>item: InventoryItem - The item to be added, which must have the following properties:
+
+<br>icon: Texture - The item's icon.
+<br>item_name: String - The name of the item.
+<br>amount: int - The quantity of the item.
+<br>type: int - The type of item:
+
+<br>0 - Stackable
+<br>1 - Unstackable
+<br>2 - Equipable
+
+
+
+
+<br><br>The inventory dictionary is structured as follows:<br>{
+    "item_name": {
+        "icon": Texture,
+        "amount": int
+    },
+    "unstackable": {
+        "item_name": {
+            "icon": Texture,
+            "amount": int
+        }
+    },
+    "equipable": {
+        "item_name": {
+            "icon": Texture,
+            "amount": int
+        }
+    }
+}
+<br><br>var inventory = InventoryComponent.new()
+inventory.add_item(InventoryItem.new("Sword", some_texture, 1, 1))
+<br>This adds a "Sword" to the unstackable inventory category.<br>Note
+
+<br>If global is enabled, all changes apply to global_inventory.
+<br>The update() method ensures that any UI elements or logic dependent on inventory updates are notified.
+
+<br>Info
+For examples of interacting with the inventory, see <a data-href="Inventory GUI" href="custom-nodes-&amp;-utility-classes/inventory-gui.html" class="internal-link" target="_self" rel="noopener nofollow">Inventory GUI</a>
+<br>]]></description><link>features/inventory-component.html</link><guid isPermaLink="false">Features/Inventory Component.md</guid><pubDate>Mon, 24 Feb 2025 17:20:52 GMT</pubDate></item><item><title><![CDATA[Ocean Generation System]]></title><description><![CDATA[ 
+ <br><br>The Ocean class is responsible for managing an ocean-like surface in a 3D scene. It dynamically follows an actor while maintaining performance by repositioning itself when the actor moves beyond a defined distance. It also includes options for visual customisation and collision support.<br><br><br>
+<br>actor: Node3D
+
+<br>The node that the ocean follows.
+
+
+<br>lag_speed: float (Range: 0 - 100, Default: 100)
+
+<br>The speed at which the ocean's position updates to catch up with the actor.
+
+
+<br>snap_distance: float (Range: 100 - 5000, Default: 500)
+
+<br>The distance from the ocean's centre at which it will reposition itself to follow the actor.
+
+
+<br>ocean_size: float (Range: 0 - 1500, Default: 1500)
+
+<br>The radius of the ocean mesh.
+<br>Changing this value updates the ocean's mesh size.
+
+
+<br>collision: bool (Default: true)
+
+<br>Determines whether the ocean should include a collision shape.
+
+
+<br><br>
+<br>_water: MeshInstance3D
+
+<br>The 3D mesh representing the ocean surface.
+
+
+<br><br>
+<br>OCEAN_MATERIAL
+
+<br>Preloaded material used for rendering the ocean.
+
+
+<br><br><br>Ensures the ocean properly initialises in the editor.<br><br>
+<br>Creates the ocean mesh.
+<br>Adds collision if enabled.
+<br><br>
+<br>Moves the ocean to follow the actor when they move beyond the snap_distance.
+<br>Uses linear interpolation (lerp) for smooth repositioning.
+<br><br>
+<br>Clears and recreates the ocean mesh when ocean_size changes.
+<br><br>
+<br>Creates and assigns the ocean mesh.
+<br><br>
+<br>Generates a circular mesh for the ocean surface using SurfaceTool.
+<br>Uses UV mapping to support materials.
+<br><br>
+<br>Generates a WorldBoundaryShape3D collision shape to prevent objects from falling through the ocean.
+<br><br>
+<br>Attach Ocean to the scene.
+<br>Assign an actor (e.g., the player or a boat).
+<br>Adjust ocean_size, lag_speed, and snap_distance as needed.
+<br>Enable or disable collision depending on game-play requirements.
+<br>Note
+
+<br>The ocean does not handle water physics or buoyancy.
+<br>The lag_speed value affects the smoothness of ocean repositioning.
+<br>The collision system is simplistic and meant primarily for world boundaries.
+
+]]></description><link>features/ocean-generation-system.html</link><guid isPermaLink="false">Features/Ocean Generation System.md</guid><pubDate>Mon, 24 Feb 2025 17:18:45 GMT</pubDate></item><item><title><![CDATA[Post Processing]]></title><description><![CDATA[ 
+ <br><br>
+<br>Custom CanvasLayer node, "PostProcess".
+<br>2D/3D support.
+<br>Custom resource type to save preset configurations, "PostProcessPreset".
+<br>Ability to dynamically modify effects through code.
+<br><br>
+<br>ASCII (Monochromatic / Render everything as ASCII text) (for now uses only: .:-+*=%@#).
+<br>Chromatic Aberration
+<br>Blur
+<br>Vignette
+<br>Glitch (Animated)
+<br>Outline (Not the best implementation, still being worked on).
+<br>Screen Shake
+<br>Analog Monitor
+<br>Grain (Animated)
+<br>Circular Waves / Speed Lines (Low Quality, still being worked on).
+<br>Fish eye effect.
+<br>CRT/VHS
+<br><br>Simply add the custom PostProcess node to the scene tree directly or through code. Set the "Configuration" property of the PostProcess to a PostProcessPreset (either pre-made or instantiated on-the-spot) and run the game. The add-on uses some simple "Screen Space" shaders to apply the desired effects.<br><img alt="image" src="lib/media/image.png"> <br><br>
+<img alt="image" src="lib/media/image-1.png"> <br><br>
+<img alt="image" src="lib/media/image-2.png"> <br><br><br><img alt="image" src="lib/media/image-3.png"><br><br><img alt="image" src="lib/media/image-4.png"><br><br>All values can be modified during runtime and the changes will be applied immediately. This applies to on/off states as well as numbered parameters. All effects can be applied in parallel and work together well.<br>(NOTE: Effects are applied on rendering layers: 99-120, so i suggest putting UI above 120 and anything else like player, world etc. under 99!)<br><br>In this example, we enable/disable ScreenShake!<br>extends Node3D
+
+func _process(_delta) -&gt; void:
+    # Check if Screen Shake is enabled
+    if $PostProcess.configuration.ScreenShake:
+        # Change the Screen Shake Power by 0.1 each frame
+        $PostProcess.configuration.ScreenShakePower += 0.1
+    
+        # if Screen Shake Power is bigger than 2, change it back to 0!
+        if $PostProcess.configuration.ScreenShakePower &gt;= 2:
+            $PostProcess.configuration.ScreenShakePower = 0
+
+    # if key T is pressed, Toggle Screen Shake
+    if Input.is_key_pressed(KEY_T):
+        if $PostProcess.configuration.ScreenShake:
+            $PostProcess.configuration.ScreenShake = false
+        else:
+            $PostProcess.configuration.ScreenShake = true
+
+<br>This also works with other effects like:<br>
+ASCII, Blur, ChromaticAberration, FishEye, etc...<br>Note
+This feature was forked from <a rel="noopener nofollow" class="external-link" href="https://github.com/ItsKorin/Godot-Post-Process-Plugin/tree/main" target="_blank">https://github.com/ItsKorin/Godot-Post-Process-Plugin/tree/main</a> and has been modified for this projects needs future changes and fixes will be pushed upstream.
+]]></description><link>features/post-processing.html</link><guid isPermaLink="false">Features/Post Processing.md</guid><pubDate>Mon, 24 Feb 2025 17:19:07 GMT</pubDate><enclosure url="lib/media/image.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="lib/media/image.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[List of Features]]></title><description><![CDATA[ 
+ <br>This page aims to list all the features currently supported by SNS.<br>Note
+This section lists features supported by the current stable version of SNS. Some of these features may change or may not be available in future versions of the framework.
+Godot <a data-tooltip-position="top" aria-label="https://docs.godotengine.org/en/stable/about/list_of_features.html#list-of-features" rel="noopener nofollow" class="external-link" href="https://docs.godotengine.org/en/stable/about/list_of_features.html#list-of-features" target="_blank">features</a> will not be covered in this list.
+<br><br>
+<br>
+<a data-href="PHOENIX (Progressive Harmonized Optimized Engine for Networked Illumination &amp; Xpression)" href="features/phoenix-(progressive-harmonized-optimized-engine-for-networked-illumination-&amp;-xpression).html" class="internal-link" target="_self" rel="noopener nofollow">PHOENIX (Progressive Harmonized Optimized Engine for Networked Illumination &amp; Xpression)</a> – A custom rendering system designed for optimised lighting, shading, and visual fidelity across environments.
+
+<br>
+<a data-href="Day and Night Cycle" href="features/day-and-night-cycle.html" class="internal-link" target="_self" rel="noopener nofollow">Day and Night Cycle</a> – A dynamic system that transitions between different times of day, affecting lighting, shadows, and ambient conditions.
+
+<br>
+<a data-href="Ocean Generation System" href="features/ocean-generation-system.html" class="internal-link" target="_self" rel="noopener nofollow">Ocean Generation System</a> – A procedural water system that simulates realistic ocean waves, buoyancy, and interactions with objects.
+
+<br>
+<a class="internal-link" data-href="Compass 2D.md" href="features/compass-2d.html" target="_self" rel="noopener nofollow">Compass navigation system</a> – A navigation aid that helps players orient themselves within the game world using cardinal directions and markers.
+
+<br>
+Terrain tools – A set of tools for creating, modifying, and optimising terrain, including height maps, textures, and foliage placement.
+
+<br>
+<a class="internal-link" data-href="Post Processing.md" href="features/post-processing.html" target="_self" rel="noopener nofollow">Post Processing system</a> – Enhances visual quality using effects like bloom, ambient occlusion, depth of field, and colour grading.
+
+<br><br>
+<br>
+<a data-tooltip-position="top" aria-label="https://github.com/kcfresh53/Godot-Debug-Camera" rel="noopener nofollow" class="external-link" href="https://github.com/kcfresh53/Godot-Debug-Camera" target="_blank">Debug camera</a> – A free-move camera that allows developers to inspect the game world from any perspective.
+
+<br>
+<a data-tooltip-position="top" aria-label="https://github.com/Ratamacue9112/CopperDC/wiki" rel="noopener nofollow" class="external-link" href="https://github.com/Ratamacue9112/CopperDC/wiki" target="_blank">Console command centre</a> – A developer console that executes commands for debugging, testing, and modifying game variables in real time.
+
+<br>
+<a data-tooltip-position="top" aria-label="https://github.com/kcfresh53/Godot-Debug-Camera" rel="noopener nofollow" class="external-link" href="https://github.com/kcfresh53/Godot-Debug-Camera" target="_blank">Runtime in-game editor</a> – A system that allows live modifications to game objects, scripts, and variables without restarting the game.
+
+<br>
+<a data-tooltip-position="top" aria-label="https://github.com/anthonyec/godot_little_camera_preview" rel="noopener nofollow" class="external-link" href="https://github.com/anthonyec/godot_little_camera_preview" target="_blank">Editor camera previews</a> – Provides real-time previews of different in-game cameras to adjust angles and compositions efficiently.
+
+<br>
+<a class="internal-link" data-href="Level Collections.md" href="features/level-collections.html" target="_self" rel="noopener nofollow">Debug level collections</a> – A set of pre-configured test environments for debugging mechanics, AI, and physics.
+
+<br><br>
+<br>
+<a class="internal-link" data-href="Cutscene Trigger 3D.md" href="features/cutscene-trigger-3d.html" target="_self" rel="noopener nofollow">Cutscene system</a> – A tool for creating and managing in-game cinematics, including camera movements, animations, and <a class="internal-link" data-href="Dialogue Player.md" href="features/dialogue-player.html" target="_self" rel="noopener nofollow">dialogue</a>.
+
+<br>
+Character manager – Handles player and NPC entities, including animations, physics, and interactions.
+
+<br>
+<a class="internal-link" data-href="State Management.md" href="features/state-management.html" target="_self" rel="noopener nofollow">State management</a> – A framework for defining and transitioning between different character or AI behaviours.
+
+<br>
+Move component – A reusable movement system that manages character or object motion in 2D or 3D space.
+
+<br>
+Move input component – A component that processes player input and translates it into movement actions.
+
+<br>
+Interaction system – Governs how players interact with objects, NPCs, and the environment.
+
+<br>
+<a data-tooltip-position="top" aria-label="Inventory Component" data-href="Inventory Component" href="features/inventory-component.html" class="internal-link" target="_self" rel="noopener nofollow">Inventory system</a> – Manages player inventory, including item collection, usage, and storage.
+
+<br>
+Stats system – Tracks and updates player or NPC attributes like health, stamina, and experience.
+
+<br>
+Audio manager – Controls background music, sound effects, and spatial audio settings.
+
+<br>
+Breakable objects – Implements destructible objects with physics-based or scripted breaking mechanics.
+
+<br>
+<a class="internal-link" data-href="Weather Controller.md" href="features/weather-controller.html" target="_self" rel="noopener nofollow">Weather systems</a> – Simulates different weather conditions such as rain, fog, and wind, affecting visuals and game-play.
+
+<br>
+Scene transition manager – Handles smooth transitions between game scenes, including loading screens and fades.
+
+<br><br>
+<br>
+<a data-tooltip-position="top" aria-label="Inventory GUI" data-href="Inventory GUI" href="custom-nodes-&amp;-utility-classes/inventory-gui.html" class="internal-link" target="_self" rel="noopener nofollow">Inventory GUI manager</a> – Controls the user interface for managing and displaying inventory items.
+
+<br>
+Inventory counter – A system for tracking and displaying item quantities in the inventory.
+
+<br>
+GUI transition manager – Handles animations and effects for seamless GUI transitions.
+
+<br>
+Health container – Displays the player’s health in the form of bars, hearts, or other indicators.
+
+<br>
+Interaction prompts – Provides on-screen prompts to guide player interactions with objects and NPCs.
+
+<br>Note
+Most of the systems here have documentation in engine using <a data-tooltip-position="top" aria-label="https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_documentation_comments.html" rel="noopener nofollow" class="external-link" href="https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_documentation_comments.html" target="_blank">documentation comments</a>. You can learn more about them by right clicking on a node and selecting "open documentation".
+<br>Warning
+Engine documentation is still a WIP depreciated methods and functions may have not been marked yet.
+<br>]]></description><link>getting-started/list-of-features.html</link><guid isPermaLink="false">Getting Started/List of Features.md</guid><pubDate>Mon, 24 Feb 2025 17:23:09 GMT</pubDate></item><item><title><![CDATA[SNS Framework Docs - 1.1 branch]]></title><description><![CDATA[ 
+ <br><img alt="Icarus_Logo.png" src="resources/icarus_logo.png"><br><br>Welcome to the official documentation of the <a data-tooltip-position="top" aria-label="https://github.com/kcfresh53/sword-and-sail" rel="noopener nofollow" class="external-link" href="https://github.com/kcfresh53/sword-and-sail" target="_blank">SNS framework</a>, a game development framework built in the <a data-tooltip-position="top" aria-label="https://godotengine.org/" rel="noopener nofollow" class="external-link" href="https://godotengine.org/" target="_blank">Godot Engine</a>. We recommend that you read the <a class="internal-link" data-href="#introduction" href="about:blank#introduction" target="_self" rel="noopener nofollow">introduction</a> section to get an overview of what this documentation has to offer.<br>The table of contents below should let you easily access the documentation for your topic of interest.<br><br>
+<br><a data-href="Introduction" href="getting-started/introduction.html" class="internal-link" target="_self" rel="noopener nofollow">Introduction</a>
+<br><a data-tooltip-position="top" aria-label="List of Features" data-href="List of Features" href="getting-started/list-of-features.html" class="internal-link" target="_self" rel="noopener nofollow">List of features</a>
+<br><a data-tooltip-position="top" aria-label="Project Structure" data-href="Project Structure" href="getting-started/project-structure.html" class="internal-link" target="_self" rel="noopener nofollow">Project structure</a>
+<br><a data-tooltip-position="top" aria-label="Best Practices" data-href="Best Practices" href="getting-started/best-practices.html" class="internal-link" target="_self" rel="noopener nofollow">Best practices</a>
+<br><a data-tooltip-position="top" aria-label="Frequently Asked Questions" data-href="Frequently Asked Questions" href="getting-started/frequently-asked-questions.html" class="internal-link" target="_self" rel="noopener nofollow">FAQ</a>
+<br>Warning
+This documentation is a WIP and may be missing important details.
+<br>]]></description><link>index.html</link><guid isPermaLink="false">Index.md</guid><pubDate>Mon, 24 Feb 2025 17:26:24 GMT</pubDate><enclosure url="resources/icarus_logo.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="resources/icarus_logo.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Inventory GUI]]></title><description><![CDATA[ 
  <br><br>The InventoryGUI is a MarginContainer responsible for managing and displaying inventory slots within a grid-based interface. It supports both vertical and horizontal slot arrangements and handles item selection and navigation.<br><br>
 <br>signal item_selected(item_data: InventoryItem)<br>
 Emitted when an inventory item is selected.
@@ -94,51 +482,7 @@ Note:
 
 <br>
 See <a data-tooltip-position="top" aria-label="Inventory Component" data-href="Inventory Component" href="features/inventory-component.html" class="internal-link" target="_self" rel="noopener nofollow">inventory component</a> to learn more
-<br>]]></description><link>custom-nodes-&amp;-utility-classes/inventory-item.html</link><guid isPermaLink="false">Custom Nodes &amp; Utility Classes/Inventory Item.md</guid><pubDate>Mon, 24 Feb 2025 02:22:49 GMT</pubDate></item><item><title><![CDATA[Animation Manager]]></title><description><![CDATA[ 
- <br><br>The AnimationManager class is a node that manages animations through an AnimationTree. It provides an interface for playing repeating and one-shot animations, handling animation transitions, and checking animation states.<br><br><br>
-<br>Emitted when an animation completes.
-<br><br><br>
-<br>Defines available animations:
-
-<br>IDLE, WALK, ATTACK, POSE, BIRD, PROUD, THINKING, BUCKET, QUESTION, STEER, CHEER, ROLL
-
-
-<br>
-Note:<br>
-More animations can be added to this script. These are default override values
-<br><br><br>
-<br>Maps repeating animations to their respective animation names.
-<br>These animations loop continuously.
-<br><br>
-<br>Maps one-shot animations to their respective animation names.
-<br>These animations play once and then stop.
-<br><br>
-<br>AnimationTree path for handling repeating animations.
-<br><br>
-<br>Format string for setting one-shot animation requests in the AnimationTree.
-<br><br><br>
-<br>The AnimationTree instance controlling animations.
-<br><br><br>
-<br>Ensures anim_tree is assigned.
-<br>Connects animation_finished signal from the AnimationTree.
-<br><br>
-<br>Emits the animation_finished signal when an animation completes.
-<br><br>
-<br>Sets the requested repeating animation in the AnimationTree.
-<br><br>
-<br>Sets the requested one-shot animation in the AnimationTree.
-<br><br>
-<br>Handles both repeating and one-shot animations based on the provided animation.
-<br>Logs a warning if the animation type is unknown.
-<br><br>
-<br>Checks if a one-shot animation is currently playing.
-<br>Returns true if the animation is active, otherwise false.
-<br><br>
-<br>Assign an AnimationTree node to anim_tree.
-<br>Call handle_animations(anim) with an Animations enum value to play an animation.
-<br>Use is_playing(anim) to check if a one-shot animation is still active.
-<br>Connect to the animation_finished signal to respond to completed animations.
-<br>This class provides a structured way to manage animations efficiently within a Godot 4 project.<br>]]></description><link>features/animation-manager.html</link><guid isPermaLink="false">Features/Animation Manager.md</guid><pubDate>Mon, 24 Feb 2025 02:44:42 GMT</pubDate></item><item><title><![CDATA[Compass 2D]]></title><description><![CDATA[ 
+<br>]]></description><link>custom-nodes-&amp;-utility-classes/inventory-item.html</link><guid isPermaLink="false">Custom Nodes &amp; Utility Classes/Inventory Item.md</guid><pubDate>Mon, 24 Feb 2025 02:22:49 GMT</pubDate></item><item><title><![CDATA[Compass 2D]]></title><description><![CDATA[ 
  <br><br>The Compass System is a Godot 4 node that provides a navigational compass for both 2D and 3D modes. It tracks Points of Interest (POI) and dynamically updates pin positions based on the player's direction and distance.<br><br><br>
 <br>@export_range(-180, 180) var north: int = 0
 
@@ -332,141 +676,7 @@ More animations can be added to this script. These are default override values
 <br>Ensure that DirectionalLight3D and WorldEnvironment are present as child nodes.
 <br>Adjust properties like cycle_rate, foggy, and current_time as needed.
 <br>Connect signals (time_changed, time_changed_night, time_changed_day) to react to time changes in your game logic.
-<br>This system provides a dynamic way to simulate time transitions in a Godot 4 environment, making it useful for open-world games, simulation experiences, and atmospheric effects.]]></description><link>features/day-and-night-cycle.html</link><guid isPermaLink="false">Features/Day and Night Cycle.md</guid><pubDate>Sun, 23 Feb 2025 21:43:25 GMT</pubDate></item><item><title><![CDATA[Dialogue Player]]></title><description><![CDATA[ 
- <br><br>The DialoguePlayer is a Godot 4 class that manages dialogue systems in games. It extends the CanvasLayer node and provides functionality for displaying character dialogue with text animation, character nameplate customisation, and signal-based camera and pose management.<br><br><br>
-<br>scene_text_file (String): Path to JSON file containing scene dialogue text
-<br>character_json_file (String): Path to JSON file containing character information
-<br><br>
-<br>selected_text (Array): Array of dialogue lines for current conversation
-<br>in_progress (bool): Tracks if dialogue is currently being displayed
-<br>text_animating (bool): Tracks if text animation is in progress
-<br>should_reveal_text (bool): Flag to control instant text revelation
-<br>content: Parsed content from scene text JSON file
-<br>character_content: Parsed content from character JSON file
-<br>current_dialogue: Currently active dialogue data
-<br>current_character: Currently active character data
-<br><br>
-<br>dialogue_box (TextureRect): Main dialogue box container
-<br>dialogue_textbox (RichTextLabel): Text display for dialogue
-<br>dialogue_nameplate (TextureRect): Character name display container
-<br>name_textbox (RichTextLabel): Text display for character name
-<br>text_sound (AudioStreamPlayer): Audio player for text animation sounds
-<br><br>
-<br>change_cam(camera: String): Emitted when camera change is requested
-<br>change_pose(character: String, pose: String): Emitted when character pose change is requested
-<br>finished: Emitted when dialogue sequence completes
-<br><br><br>func _ready() -&gt; void
-func load_scene_text() -&gt; void
-<br>
-<br>_ready(): Initializes the dialogue system by hiding the dialogue box and loading text files
-<br>load_scene_text(): Loads and parses the JSON files for scene text and character data
-<br><br>func on_display_dialog(text_key) -&gt; void
-func show_text() -&gt; void
-func reveal_text() -&gt; void
-func next_line() -&gt; void
-func finish() -&gt; void
-<br>
-<br>on_display_dialog(text_key): Main entry point for displaying dialogue. Takes a text key to look up dialogue in JSON
-<br>show_text(): Handles text display animation and processing of camera/pose commands
-<br>reveal_text(): Instantly reveals all text in the current dialogue box
-<br>next_line(): Advances to the next line of dialogue
-<br>finish(): Cleans up current dialogue and either ends or moves to next dialogue sequence
-<br><br><br>The system supports special commands embedded in dialogue text:<br>
-<br>Camera Commands: !(camera_command)!
-
-<br>Triggers camera changes via the change_cam signal
-
-
-<br>Pose Commands: &lt;(pose_command)&gt;
-
-<br>Triggers character pose changes via the change_pose signal
-
-
-<br><br>
-<br>Characters appear progressively with a 0.02-second delay
-<br>Sound effects play every 3 characters
-<br>Can be skipped by player input to show full text immediately
-<br><br><br>{
-    "dialogue_key": {
-        "character": "character_id",
-        "text": ["array", "of", "dialogue", "lines"],
-        "next": "next_dialogue_key"
-    }
-}
-<br><br>{
-    "character_id": {
-        "name": "Character Name",
-        "nameplate_color": "color_value"
-    }
-}
-<br><br># Initialize dialogue
-dialogue_player.on_display_dialog("opening_scene")
-
-# Handle dialogue advancement
-# Called when player provides input
-if Input.is_action_just_pressed("advance_dialogue"):
-    dialogue_player.on_display_dialog("current_key")
-<br>
-Notes:
-
-<br>Text animation can be interrupted by player input
-<br>The system automatically handles transitions between dialogue sequences using the "next" field
-<br>Camera and pose commands are automatically stripped from displayed text
-<br>The dialogue system maintains state to track progress through conversations
-
-]]></description><link>features/dialogue-player.html</link><guid isPermaLink="false">Features/Dialogue Player.md</guid><pubDate>Sun, 23 Feb 2025 21:50:52 GMT</pubDate></item><item><title><![CDATA[Inventory Component]]></title><description><![CDATA[ 
- <br><br>The InventoryComponent is a node that manages an inventory system. It supports stackable, unstackable, and equipable items. The inventory can be global, meaning it is shared across all instances, or local to the specific node.<br><br>
-<br>Supports global and local inventories.
-<br>Handles stackable, unstackable, and equipable items.
-<br>Provides signals for inventory updates.
-<br>Automatically merges global inventories when needed.
-<br><br><br>Determines if this inventory is global. If true, it shares items with all other instances marked as global.<br><br>A shared inventory dictionary for all global instances.<br><br>The inventory dictionary that holds items. If global is enabled, it returns the global_inventory.<br><br><br>Emitted whenever the inventory is updated.<br><br><br>Initializes the inventory. If global, it merges with the shared global_inventory.<br><br>Syncs the local inventory with the global inventory.<br><br>Triggers the updated signal to notify other nodes of inventory changes.<br><br>Adds an item to the inventory based on its type:<br>
-To learn more, check out <a data-href="Inventory Item" href="custom-nodes-&amp;-utility-classes/inventory-item.html" class="internal-link" target="_self" rel="noopener nofollow">Inventory Item</a>
-<br><br>
-<br>item: InventoryItem - The item to be added, which must have the following properties:
-
-<br>icon: Texture - The item's icon.
-<br>item_name: String - The name of the item.
-<br>amount: int - The quantity of the item.
-<br>type: int - The type of item:
-
-<br>0 - Stackable
-<br>1 - Unstackable
-<br>2 - Equipable
-
-
-
-
-<br><br>The inventory dictionary is structured as follows:<br>{
-    "item_name": {
-        "icon": Texture,
-        "amount": int
-    },
-    "unstackable": {
-        "item_name": {
-            "icon": Texture,
-            "amount": int
-        }
-    },
-    "equipable": {
-        "item_name": {
-            "icon": Texture,
-            "amount": int
-        }
-    }
-}
-<br><br>var inventory = InventoryComponent.new()
-inventory.add_item(InventoryItem.new("Sword", some_texture, 1, 1))
-<br>This adds a "Sword" to the unstackable inventory category.<br>
-Notes:
-
-<br>If global is enabled, all changes apply to global_inventory.
-<br>The update() method ensures that any UI elements or logic dependent on inventory updates are notified.
-
-<br>
-Also see:<br>
-<a data-href="Inventory GUI" href="custom-nodes-&amp;-utility-classes/inventory-gui.html" class="internal-link" target="_self" rel="noopener nofollow">Inventory GUI</a>
-<br>]]></description><link>features/inventory-component.html</link><guid isPermaLink="false">Features/Inventory Component.md</guid><pubDate>Mon, 24 Feb 2025 02:30:18 GMT</pubDate></item><item><title><![CDATA[Level Collections]]></title><description><![CDATA[ 
+<br>This system provides a dynamic way to simulate time transitions in a Godot 4 environment, making it useful for open-world games, simulation experiences, and atmospheric effects.]]></description><link>features/day-and-night-cycle.html</link><guid isPermaLink="false">Features/Day and Night Cycle.md</guid><pubDate>Sun, 23 Feb 2025 21:43:25 GMT</pubDate></item><item><title><![CDATA[Level Collections]]></title><description><![CDATA[ 
  <br><br>The LevelCollection class is a Godot 4 Resource used to manage a collection of level scene files. It provides functionality for retrieving levels by name.<br><br><br>
 <br>An array of level scene file paths stored as strings.
 <br>Will be changed to a typed dictionary in Godot 4.4.
@@ -480,119 +690,8 @@ Also see:<br>
 <br>Call get_level(level_name) to retrieve a level’s file path by its name.
 <br>Ensure that the level names match the scene file names (excluding the .tscn extension).
 <br>Check for an empty return value to handle invalid level names properly.
-<br>This class provides a simple way to manage and retrieve level scenes dynamically within a Godot 4 project.]]></description><link>features/level-collections.html</link><guid isPermaLink="false">Features/Level Collections.md</guid><pubDate>Sun, 23 Feb 2025 21:12:28 GMT</pubDate></item><item><title><![CDATA[Ocean Generation System]]></title><description><![CDATA[ 
- <br><br>The Ocean class is responsible for managing an ocean-like surface in a 3D scene. It dynamically follows an actor while maintaining performance by repositioning itself when the actor moves beyond a defined distance. It also includes options for visual customisation and collision support.<br><br><br>
-<br>actor: Node3D
-
-<br>The node that the ocean follows.
-
-
-<br>lag_speed: float (Range: 0 - 100, Default: 100)
-
-<br>The speed at which the ocean's position updates to catch up with the actor.
-
-
-<br>snap_distance: float (Range: 100 - 5000, Default: 500)
-
-<br>The distance from the ocean's centre at which it will reposition itself to follow the actor.
-
-
-<br>ocean_size: float (Range: 0 - 1500, Default: 1500)
-
-<br>The radius of the ocean mesh.
-<br>Changing this value updates the ocean's mesh size.
-
-
-<br>collision: bool (Default: true)
-
-<br>Determines whether the ocean should include a collision shape.
-
-
-<br><br>
-<br>_water: MeshInstance3D
-
-<br>The 3D mesh representing the ocean surface.
-
-
-<br><br>
-<br>OCEAN_MATERIAL
-
-<br>Preloaded material used for rendering the ocean.
-
-
-<br><br><br>Ensures the ocean properly initialises in the editor.<br><br>
-<br>Creates the ocean mesh.
-<br>Adds collision if enabled.
-<br><br>
-<br>Moves the ocean to follow the actor when they move beyond the snap_distance.
-<br>Uses linear interpolation (lerp) for smooth repositioning.
-<br><br>
-<br>Clears and recreates the ocean mesh when ocean_size changes.
-<br><br>
-<br>Creates and assigns the ocean mesh.
-<br><br>
-<br>Generates a circular mesh for the ocean surface using SurfaceTool.
-<br>Uses UV mapping to support materials.
-<br><br>
-<br>Generates a WorldBoundaryShape3D collision shape to prevent objects from falling through the ocean.
-<br><br>
-<br>Attach Ocean to the scene.
-<br>Assign an actor (e.g., the player or a boat).
-<br>Adjust ocean_size, lag_speed, and snap_distance as needed.
-<br>Enable or disable collision depending on game-play requirements.
-<br>
-Note:
-
-<br>The ocean does not handle water physics or buoyancy.
-<br>The lag_speed value affects the smoothness of ocean repositioning.
-<br>The collision system is simplistic and meant primarily for world boundaries.
-
-]]></description><link>features/ocean-generation-system.html</link><guid isPermaLink="false">Features/Ocean Generation System.md</guid><pubDate>Sun, 23 Feb 2025 21:39:06 GMT</pubDate></item><item><title><![CDATA[PHOENIX (Progressive Harmonized Optimized Engine for Networked Illumination & Xpression)]]></title><description><![CDATA[ 
- ]]></description><link>features/phoenix-(progressive-harmonized-optimized-engine-for-networked-illumination-&amp;-xpression).html</link><guid isPermaLink="false">Features/PHOENIX (Progressive Harmonized Optimized Engine for Networked Illumination &amp; Xpression).md</guid><pubDate>Sun, 23 Feb 2025 20:36:31 GMT</pubDate></item><item><title><![CDATA[Post Processing]]></title><description><![CDATA[ 
- <br><br>
-<br>Custom CanvasLayer node, "PostProcess".
-<br>2D/3D support.
-<br>Custom resource type to save preset configurations, "PostProcessPreset".
-<br>Ability to dynamically modify effects through code.
-<br><br>
-<br>ASCII (Monochromatic / Render everything as ASCII text) (for now uses only: .:-+*=%@#).
-<br>Chromatic Aberration
-<br>Blur
-<br>Vignette
-<br>Glitch (Animated)
-<br>Outline (Not the best implementation, still being worked on).
-<br>Screen Shake
-<br>Analog Monitor
-<br>Grain (Animated)
-<br>Circular Waves / Speed Lines (Low Quality, still being worked on).
-<br>Fish eye effect.
-<br>CRT/VHS
-<br><br>Simply add the custom PostProcess node to the scene tree directly or through code. Set the "Configuration" property of the PostProcess to a PostProcessPreset (either pre-made or instantiated on-the-spot) and run the game. The add-on uses some simple "Screen Space" shaders to apply the desired effects.<br><img alt="image" src="lib/media/image.png"> <br><br>
-<img alt="image" src="lib/media/image-1.png"> <br><br>
-<img alt="image" src="lib/media/image-2.png"> <br><br><br><img alt="image" src="lib/media/image-3.png"><br><br><img alt="image" src="lib/media/image-4.png"><br><br>All values can be modified during runtime and the changes will be applied immediately. This applies to on/off states as well as numbered parameters. All effects can be applied in parallel and work together well.<br>(NOTE: Effects are applied on rendering layers: 99-120, so i suggest putting UI above 120 and anything else like player, world etc. under 99!)<br><br>In this example, we enable/disable ScreenShake!<br>extends Node3D
-
-func _process(_delta) -&gt; void:
-    # Check if Screen Shake is enabled
-    if $PostProcess.configuration.ScreenShake:
-        # Change the Screen Shake Power by 0.1 each frame
-        $PostProcess.configuration.ScreenShakePower += 0.1
-    
-        # if Screen Shake Power is bigger than 2, change it back to 0!
-        if $PostProcess.configuration.ScreenShakePower &gt;= 2:
-            $PostProcess.configuration.ScreenShakePower = 0
-
-    # if key T is pressed, Toggle Screen Shake
-    if Input.is_key_pressed(KEY_T):
-        if $PostProcess.configuration.ScreenShake:
-            $PostProcess.configuration.ScreenShake = false
-        else:
-            $PostProcess.configuration.ScreenShake = true
-
-<br>This also works with other effects like:<br>
-ASCII, Blur, ChromaticAberration, FishEye, etc...<br>
-Note:<br>
-This feature was forked from <a rel="noopener nofollow" class="external-link" href="https://github.com/ItsKorin/Godot-Post-Process-Plugin/tree/main" target="_blank">https://github.com/ItsKorin/Godot-Post-Process-Plugin/tree/main</a> and has been modified for this projects needs future changes and fixes will be pushed upstream.
-]]></description><link>features/post-processing.html</link><guid isPermaLink="false">Features/Post Processing.md</guid><pubDate>Sun, 23 Feb 2025 22:27:13 GMT</pubDate><enclosure url="lib/media/image.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;lib/media/image.png&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[State Management]]></title><description><![CDATA[ 
+<br>This class provides a simple way to manage and retrieve level scenes dynamically within a Godot 4 project.]]></description><link>features/level-collections.html</link><guid isPermaLink="false">Features/Level Collections.md</guid><pubDate>Sun, 23 Feb 2025 21:12:28 GMT</pubDate></item><item><title><![CDATA[PHOENIX (Progressive Harmonized Optimized Engine for Networked Illumination & Xpression)]]></title><description><![CDATA[ 
+ ]]></description><link>features/phoenix-(progressive-harmonized-optimized-engine-for-networked-illumination-&amp;-xpression).html</link><guid isPermaLink="false">Features/PHOENIX (Progressive Harmonized Optimized Engine for Networked Illumination &amp; Xpression).md</guid><pubDate>Sun, 23 Feb 2025 20:36:31 GMT</pubDate></item><item><title><![CDATA[State Management]]></title><description><![CDATA[ 
  <br><br>The StateMachine and State classes provide a modular system for managing game states in a Godot 4 project. The StateMachine handles transitions between different states, while individual states inherit from the State class to define specific behaviors.<br><br><br><br><br>
 <br>The starting state when the StateMachine is initialized.
 <br><br>
@@ -800,108 +899,9 @@ When creating a new scene, nodes should be structured in the following order for
 Following this structure ensures that each scene remains organised and that different systems (UI, physics, visuals, and logic) remain neatly separated.
 By following these best practices, we ensure a maintainable, scalable, and efficient project structure.
 
-<br>]]></description><link>getting-started/best-practices.html</link><guid isPermaLink="false">Getting Started/Best Practices.md</guid><pubDate>Mon, 24 Feb 2025 02:41:32 GMT</pubDate><enclosure url="lib/media/audio_bus.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;lib/media/audio_bus.png&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Frequently Asked Questions]]></title><description><![CDATA[ 
+<br>]]></description><link>getting-started/best-practices.html</link><guid isPermaLink="false">Getting Started/Best Practices.md</guid><pubDate>Mon, 24 Feb 2025 02:41:32 GMT</pubDate><enclosure url="lib/media/audio_bus.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="lib/media/audio_bus.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Frequently Asked Questions]]></title><description><![CDATA[ 
  <br>For Godot related questions, we recommend you make reference of the Godot Engine <a data-tooltip-position="top" aria-label="https://docs.godotengine.org/en/stable/about/faq.html" rel="noopener nofollow" class="external-link" href="https://docs.godotengine.org/en/stable/about/faq.html" target="_blank">FAQ</a>.<br><br>You can now reference the <a class="internal-link" data-href="Getting Started/Project Structure" href="getting-started/project-structure.html" target="_self" rel="noopener nofollow">Project structure</a> section of the documentation.<br><br>They were copied over from an alpha version of the framework and were named incorrectly. This issue was only caught months later when dependencies were already built around the components.<br><br>You can now reference the <a class="internal-link" data-href="Getting Started/Project Structure" href="getting-started/project-structure.html" target="_self" rel="noopener nofollow">Project structure</a> section of the documentation.<br><br>Short answer: <a data-tooltip-position="top" aria-label="https://docs.godotengine.org/en/stable/about/faq.html" rel="noopener nofollow" class="external-link" href="https://docs.godotengine.org/en/stable/about/faq.html" target="_blank">FAQ</a>.<br>Long answer: We believe in free and open source software. Godot is a tool made and used by game developers which makes it easy to focus on game development rather than fighting the tool you are working with.<br>]]></description><link>getting-started/frequently-asked-questions.html</link><guid isPermaLink="false">Getting Started/Frequently Asked Questions.md</guid><pubDate>Mon, 24 Feb 2025 02:41:40 GMT</pubDate></item><item><title><![CDATA[Introduction]]></title><description><![CDATA[ 
- <br>Welcome to the official documentation of the <a data-tooltip-position="top" aria-label="https://github.com/kcfresh53/sword-and-sail" rel="noopener nofollow" class="external-link" href="https://github.com/kcfresh53/sword-and-sail" target="_blank">SNS framework</a>, a game development framework built in the <a data-tooltip-position="top" aria-label="https://godotengine.org/" rel="noopener nofollow" class="external-link" href="https://godotengine.org/" target="_blank">Godot Engine</a>. The SNS framework was developed for the Sword and Sail game, but it quickly became a complex super-set of the Godot Engine, providing several tools for making complex narrative driven 3D games.<br><br>Using this framework requires prerequisite knowledge in Godot 4.3. There is a wealth of <a data-tooltip-position="top" aria-label="https://docs.godotengine.org/en/stable/community/tutorials.html#doc-community-tutorials" rel="noopener nofollow" class="external-link" href="https://docs.godotengine.org/en/stable/community/tutorials.html#doc-community-tutorials" target="_blank">Tutorials and resources</a> provided by the engines official <a data-tooltip-position="top" aria-label="https://docs.godotengine.org/en/stable" rel="noopener nofollow" class="external-link" href="https://docs.godotengine.org/en/stable" target="_blank">Documentation</a> that we recommend as a starting point.<br>In case you have trouble with one of the tutorials or your project, you can find help on our <a data-tooltip-position="top" aria-label="https://discord.gg/erCU6Rhm" rel="noopener nofollow" class="external-link" href="https://discord.gg/erCU6Rhm" target="_blank">Discord</a> server, various <a data-tooltip-position="top" aria-label="https://godotengine.org/community/" rel="noopener nofollow" class="external-link" href="https://godotengine.org/community/" target="_blank">Community channels</a>, the Godot <a data-tooltip-position="top" aria-label="https://discord.gg/godotengine" rel="noopener nofollow" class="external-link" href="https://discord.gg/godotengine" target="_blank">Discord</a> community and <a data-tooltip-position="top" aria-label="https://forum.godotengine.org/" rel="noopener nofollow" class="external-link" href="https://forum.godotengine.org/" target="_blank">Forum.</a><br>]]></description><link>getting-started/introduction.html</link><guid isPermaLink="false">Getting Started/Introduction.md</guid><pubDate>Mon, 24 Feb 2025 03:05:24 GMT</pubDate></item><item><title><![CDATA[List of Features]]></title><description><![CDATA[ 
- <br>This page aims to list all the features currently supported by SNS.<br>
-Note:
-This section lists features supported by the current stable version of SNS. Some of these features may change or may not be available in future versions of the framework.
-Godot <a data-tooltip-position="top" aria-label="https://docs.godotengine.org/en/stable/about/list_of_features.html#list-of-features" rel="noopener nofollow" class="external-link" href="https://docs.godotengine.org/en/stable/about/list_of_features.html#list-of-features" target="_blank">features</a> will not be covered in this list.
-<br><br>
-<br>
-<a data-href="PHOENIX (Progressive Harmonized Optimized Engine for Networked Illumination &amp; Xpression)" href="features/phoenix-(progressive-harmonized-optimized-engine-for-networked-illumination-&amp;-xpression).html" class="internal-link" target="_self" rel="noopener nofollow">PHOENIX (Progressive Harmonized Optimized Engine for Networked Illumination &amp; Xpression)</a> – A custom rendering system designed for optimised lighting, shading, and visual fidelity across environments.
-
-<br>
-<a data-href="Day and Night Cycle" href="features/day-and-night-cycle.html" class="internal-link" target="_self" rel="noopener nofollow">Day and Night Cycle</a> – A dynamic system that transitions between different times of day, affecting lighting, shadows, and ambient conditions.
-
-<br>
-<a data-href="Ocean Generation System" href="features/ocean-generation-system.html" class="internal-link" target="_self" rel="noopener nofollow">Ocean Generation System</a> – A procedural water system that simulates realistic ocean waves, buoyancy, and interactions with objects.
-
-<br>
-<a class="internal-link" data-href="Compass 2D.md" href="features/compass-2d.html" target="_self" rel="noopener nofollow">Compass navigation system</a> – A navigation aid that helps players orient themselves within the game world using cardinal directions and markers.
-
-<br>
-Terrain tools – A set of tools for creating, modifying, and optimising terrain, including height maps, textures, and foliage placement.
-
-<br>
-<a class="internal-link" data-href="Post Processing.md" href="features/post-processing.html" target="_self" rel="noopener nofollow">Post Processing system</a> – Enhances visual quality using effects like bloom, ambient occlusion, depth of field, and colour grading.
-
-<br><br>
-<br>
-<a data-tooltip-position="top" aria-label="https://github.com/kcfresh53/Godot-Debug-Camera" rel="noopener nofollow" class="external-link" href="https://github.com/kcfresh53/Godot-Debug-Camera" target="_blank">Debug camera</a> – A free-move camera that allows developers to inspect the game world from any perspective.
-
-<br>
-<a data-tooltip-position="top" aria-label="https://github.com/Ratamacue9112/CopperDC/wiki" rel="noopener nofollow" class="external-link" href="https://github.com/Ratamacue9112/CopperDC/wiki" target="_blank">Console command centre</a> – A developer console that executes commands for debugging, testing, and modifying game variables in real time.
-
-<br>
-<a data-tooltip-position="top" aria-label="https://github.com/kcfresh53/Godot-Debug-Camera" rel="noopener nofollow" class="external-link" href="https://github.com/kcfresh53/Godot-Debug-Camera" target="_blank">Runtime in-game editor</a> – A system that allows live modifications to game objects, scripts, and variables without restarting the game.
-
-<br>
-<a data-tooltip-position="top" aria-label="https://github.com/anthonyec/godot_little_camera_preview" rel="noopener nofollow" class="external-link" href="https://github.com/anthonyec/godot_little_camera_preview" target="_blank">Editor camera previews</a> – Provides real-time previews of different in-game cameras to adjust angles and compositions efficiently.
-
-<br>
-<a class="internal-link" data-href="Level Collections.md" href="features/level-collections.html" target="_self" rel="noopener nofollow">Debug level collections</a> – A set of pre-configured test environments for debugging mechanics, AI, and physics.
-
-<br><br>
-<br>
-<a class="internal-link" data-href="Cutscene Trigger 3D.md" href="features/cutscene-trigger-3d.html" target="_self" rel="noopener nofollow">Cutscene system</a> – A tool for creating and managing in-game cinematics, including camera movements, animations, and <a class="internal-link" data-href="Dialogue Player.md" href="features/dialogue-player.html" target="_self" rel="noopener nofollow">dialogue</a>.
-
-<br>
-Character manager – Handles player and NPC entities, including animations, physics, and interactions.
-
-<br>
-<a class="internal-link" data-href="State Management.md" href="features/state-management.html" target="_self" rel="noopener nofollow">State management</a> – A framework for defining and transitioning between different character or AI behaviours.
-
-<br>
-Move component – A reusable movement system that manages character or object motion in 2D or 3D space.
-
-<br>
-Move input component – A component that processes player input and translates it into movement actions.
-
-<br>
-Interaction system – Governs how players interact with objects, NPCs, and the environment.
-
-<br>
-<a data-tooltip-position="top" aria-label="Inventory Component" data-href="Inventory Component" href="features/inventory-component.html" class="internal-link" target="_self" rel="noopener nofollow">Inventory system</a> – Manages player inventory, including item collection, usage, and storage.
-
-<br>
-Stats system – Tracks and updates player or NPC attributes like health, stamina, and experience.
-
-<br>
-Audio manager – Controls background music, sound effects, and spatial audio settings.
-
-<br>
-Breakable objects – Implements destructible objects with physics-based or scripted breaking mechanics.
-
-<br>
-<a class="internal-link" data-href="Weather Controller.md" href="features/weather-controller.html" target="_self" rel="noopener nofollow">Weather systems</a> – Simulates different weather conditions such as rain, fog, and wind, affecting visuals and game-play.
-
-<br>
-Scene transition manager – Handles smooth transitions between game scenes, including loading screens and fades.
-
-<br><br>
-<br>
-<a data-tooltip-position="top" aria-label="Inventory GUI" data-href="Inventory GUI" href="custom-nodes-&amp;-utility-classes/inventory-gui.html" class="internal-link" target="_self" rel="noopener nofollow">Inventory GUI manager</a> – Controls the user interface for managing and displaying inventory items.
-
-<br>
-Inventory counter – A system for tracking and displaying item quantities in the inventory.
-
-<br>
-GUI transition manager – Handles animations and effects for seamless GUI transitions.
-
-<br>
-Health container – Displays the player’s health in the form of bars, hearts, or other indicators.
-
-<br>
-Interaction prompts – Provides on-screen prompts to guide player interactions with objects and NPCs.
-
-<br>
-Note:
-Most of the systems here have documentation in engine using <a data-tooltip-position="top" aria-label="https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_documentation_comments.html" rel="noopener nofollow" class="external-link" href="https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_documentation_comments.html" target="_blank">documentation comments</a>. You can learn more about them by right clicking on a node and selecting "open documentation".
-<br>
-Warning:
-Engine documentation is still a WIP depreciated methods and functions may have not been marked yet.
-<br>]]></description><link>getting-started/list-of-features.html</link><guid isPermaLink="false">Getting Started/List of Features.md</guid><pubDate>Mon, 24 Feb 2025 03:07:23 GMT</pubDate></item><item><title><![CDATA[Project Structure]]></title><description><![CDATA[ 
+ <br>Welcome to the official documentation of the <a data-tooltip-position="top" aria-label="https://github.com/kcfresh53/sword-and-sail" rel="noopener nofollow" class="external-link" href="https://github.com/kcfresh53/sword-and-sail" target="_blank">SNS framework</a>, a game development framework built in the <a data-tooltip-position="top" aria-label="https://godotengine.org/" rel="noopener nofollow" class="external-link" href="https://godotengine.org/" target="_blank">Godot Engine</a>. The SNS framework was developed for the Sword and Sail game, but it quickly became a complex super-set of the Godot Engine, providing several tools for making complex narrative driven 3D games.<br><br>Using this framework requires prerequisite knowledge in Godot 4.3. There is a wealth of <a data-tooltip-position="top" aria-label="https://docs.godotengine.org/en/stable/community/tutorials.html#doc-community-tutorials" rel="noopener nofollow" class="external-link" href="https://docs.godotengine.org/en/stable/community/tutorials.html#doc-community-tutorials" target="_blank">Tutorials and resources</a> provided by the engines official <a data-tooltip-position="top" aria-label="https://docs.godotengine.org/en/stable" rel="noopener nofollow" class="external-link" href="https://docs.godotengine.org/en/stable" target="_blank">Documentation</a> that we recommend as a starting point.<br>In case you have trouble with one of the tutorials or your project, you can find help on our <a data-tooltip-position="top" aria-label="https://discord.gg/erCU6Rhm" rel="noopener nofollow" class="external-link" href="https://discord.gg/erCU6Rhm" target="_blank">Discord</a> server, various <a data-tooltip-position="top" aria-label="https://godotengine.org/community/" rel="noopener nofollow" class="external-link" href="https://godotengine.org/community/" target="_blank">Community channels</a>, the Godot <a data-tooltip-position="top" aria-label="https://discord.gg/godotengine" rel="noopener nofollow" class="external-link" href="https://discord.gg/godotengine" target="_blank">Discord</a> community and <a data-tooltip-position="top" aria-label="https://forum.godotengine.org/" rel="noopener nofollow" class="external-link" href="https://forum.godotengine.org/" target="_blank">Forum.</a><br>]]></description><link>getting-started/introduction.html</link><guid isPermaLink="false">Getting Started/Introduction.md</guid><pubDate>Mon, 24 Feb 2025 03:05:24 GMT</pubDate></item><item><title><![CDATA[Project Structure]]></title><description><![CDATA[ 
  <br>This page will cover the project configuration, file system, collision layers and naming conventions.<br><br>A project will always have the following file structure:<br>res/
 ├── addons/
 ├── assets/
@@ -1076,13 +1076,4 @@ hook - Defines the grappling hook itself or similar tethering mechanics that int
 <br>
 cutscene - Used for elements that should only be active during cutscenes, ensuring they don’t interfere with regular gameplay physics or interactions.
 
-<br><img alt="Collision  layers screenshot" src="lib/media/collision.png"><br>]]></description><link>getting-started/project-structure.html</link><guid isPermaLink="false">Getting Started/Project Structure.md</guid><pubDate>Mon, 24 Feb 2025 03:09:06 GMT</pubDate><enclosure url="lib/media/collision.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;lib/media/collision.png&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[SNS Framework Docs - 1.1 branch]]></title><description><![CDATA[ 
- <br><img alt="Icarus_Logo.png" src="resources/icarus_logo.png"><br><br>
-Note: This documentation is a WIP and may be missing important details.
-<br>Welcome to the official documentation of the <a data-tooltip-position="top" aria-label="https://github.com/kcfresh53/sword-and-sail" rel="noopener nofollow" class="external-link" href="https://github.com/kcfresh53/sword-and-sail" target="_blank">SNS framework</a>, a game development framework built in the <a data-tooltip-position="top" aria-label="https://godotengine.org/" rel="noopener nofollow" class="external-link" href="https://godotengine.org/" target="_blank">Godot Engine</a>. We recommend that you read the <a class="internal-link" data-href="#introduction" href="about:blank#introduction" target="_self" rel="noopener nofollow">introduction</a> section to get an overview of what this documentation has to offer.<br>The table of contents below should let you easily access the documentation for your topic of interest.<br><br>
-<br><a data-href="Introduction" href="getting-started/introduction.html" class="internal-link" target="_self" rel="noopener nofollow">Introduction</a>
-<br><a data-tooltip-position="top" aria-label="List of Features" data-href="List of Features" href="getting-started/list-of-features.html" class="internal-link" target="_self" rel="noopener nofollow">List of features</a>
-<br><a data-tooltip-position="top" aria-label="Project Structure" data-href="Project Structure" href="getting-started/project-structure.html" class="internal-link" target="_self" rel="noopener nofollow">Project structure</a>
-<br><a data-tooltip-position="top" aria-label="Best Practices" data-href="Best Practices" href="getting-started/best-practices.html" class="internal-link" target="_self" rel="noopener nofollow">Best practices</a>
-<br><a data-tooltip-position="top" aria-label="Frequently Asked Questions" data-href="Frequently Asked Questions" href="getting-started/frequently-asked-questions.html" class="internal-link" target="_self" rel="noopener nofollow">FAQ</a>
-<br>]]></description><link>index.html</link><guid isPermaLink="false">Index.md</guid><pubDate>Mon, 24 Feb 2025 03:08:17 GMT</pubDate><enclosure url="resources/icarus_logo.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;resources/icarus_logo.png&quot;&gt;&lt;/figure&gt;</content:encoded></item></channel></rss>
+<br><img alt="Collision  layers screenshot" src="lib/media/collision.png"><br>]]></description><link>getting-started/project-structure.html</link><guid isPermaLink="false">Getting Started/Project Structure.md</guid><pubDate>Mon, 24 Feb 2025 03:09:06 GMT</pubDate><enclosure url="lib/media/collision.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="lib/media/collision.png"&gt;&lt;/figure&gt;</content:encoded></item></channel></rss>
