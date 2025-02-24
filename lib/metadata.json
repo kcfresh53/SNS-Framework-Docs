@@ -1,16 +1,19 @@
 {
   "vaultName": "documentation",
-  "lastExport": 1740360027842,
+  "lastExport": 1740365324319,
   "pluginVersion": "1.8.01",
   "validBodyClasses": "publish css-settings-manager theme-dark show-inline-title show-ribbon",
   "useCustomHeadContent": false,
   "useCustomFavicon": false,
   "files": [
+    "Custom Nodes & Utility Classes/Inventory GUI.md",
+    "Custom Nodes & Utility Classes/Inventory Item.md",
     "Features/Animation Manager.md",
     "Features/Compass 2D.md",
     "Features/Cutscene Trigger 3D.md",
     "Features/Day and Night Cycle.md",
     "Features/Dialogue Player.md",
+    "Features/Inventory Component.md",
     "Features/Level Collections.md",
     "Features/Ocean Generation System.md",
     "Features/PHOENIX (Progressive Harmonized Optimized Engine for Networked Illumination & Xpression).md",
@@ -20,22 +23,7 @@
     "Getting Started/Best Practices.md",
     "Getting Started/Frequently Asked Questions.md",
     "Getting Started/Project Structure.md",
-    "resources/audio_bus.png.import",
-    "resources/collision.png.import",
-    "resources/Icarus_Logo.png.import",
-    "resources/Image.png",
-    "resources/Image 1.png",
-    "resources/Image 2.png",
-    "resources/Image 3.png",
-    "resources/Image 4.png",
     "DOCUMENTATION.md",
-    "lib/media/image.png",
-    "lib/media/image-1.png",
-    "lib/media/image-2.png",
-    "lib/media/image-3.png",
-    "lib/media/image-4.png",
-    "lib/media/audio_bus.png",
-    "lib/media/collision.png",
     "resources/icarus_logo.png",
     "lib/scripts/graph-wasm.wasm",
     "lib/fonts/94f2f163d4b698242fef.otf",
@@ -63,8 +51,16 @@
     "lib/media/favicon.png",
     "lib/scripts/graph-data.js",
     "lib/styles/obsidian.css",
+    "lib/styles/theme.css",
     "lib/styles/global-variable-styles.css",
-    "lib/styles/main-styles.css"
+    "lib/styles/main-styles.css",
+    "lib/media/image.png",
+    "lib/media/image-1.png",
+    "lib/media/image-2.png",
+    "lib/media/image-3.png",
+    "lib/media/image-4.png",
+    "lib/media/audio_bus.png",
+    "lib/media/collision.png"
   ],
   "mainDependencies": [
     "lib/scripts/graph-wasm.wasm",
@@ -93,60 +89,79 @@
     "lib/media/favicon.png",
     "lib/scripts/graph-data.js",
     "lib/styles/obsidian.css",
+    "lib/styles/theme.css",
     "lib/styles/global-variable-styles.css",
     "lib/styles/main-styles.css"
   ],
   "fileInfo": {
+    "Custom Nodes & Utility Classes/Inventory GUI.md": {
+      "modifiedTime": 1740365149074,
+      "sourceSize": 3039,
+      "exportedPath": "custom-nodes-&-utility-classes/inventory-gui.html",
+      "dependencies": []
+    },
+    "Custom Nodes & Utility Classes/Inventory Item.md": {
+      "modifiedTime": 1740365149074,
+      "sourceSize": 872,
+      "exportedPath": "custom-nodes-&-utility-classes/inventory-item.html",
+      "dependencies": []
+    },
     "Features/Animation Manager.md": {
-      "modifiedTime": 1740360027842,
-      "sourceSize": 2474,
+      "modifiedTime": 1740365149074,
+      "sourceSize": 2479,
       "exportedPath": "features/animation-manager.html",
       "dependencies": []
     },
     "Features/Compass 2D.md": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365149074,
       "sourceSize": 3263,
       "exportedPath": "features/compass-2d.html",
       "dependencies": []
     },
     "Features/Cutscene Trigger 3D.md": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365149074,
       "sourceSize": 2312,
       "exportedPath": "features/cutscene-trigger-3d.html",
       "dependencies": []
     },
     "Features/Day and Night Cycle.md": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365149074,
       "sourceSize": 3317,
       "exportedPath": "features/day-and-night-cycle.html",
       "dependencies": []
     },
     "Features/Dialogue Player.md": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365149074,
       "sourceSize": 3989,
       "exportedPath": "features/dialogue-player.html",
       "dependencies": []
     },
+    "Features/Inventory Component.md": {
+      "modifiedTime": 1740365149074,
+      "sourceSize": 2590,
+      "exportedPath": "features/inventory-component.html",
+      "dependencies": []
+    },
     "Features/Level Collections.md": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365149074,
       "sourceSize": 1109,
       "exportedPath": "features/level-collections.html",
       "dependencies": []
     },
     "Features/Ocean Generation System.md": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365149074,
       "sourceSize": 2464,
       "exportedPath": "features/ocean-generation-system.html",
       "dependencies": []
     },
     "Features/PHOENIX (Progressive Harmonized Optimized Engine for Networked Illumination & Xpression).md": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365149074,
       "sourceSize": 0,
       "exportedPath": "features/phoenix-(progressive-harmonized-optimized-engine-for-networked-illumination-&-xpression).html",
       "dependencies": []
     },
     "Features/Post Processing.md": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365149074,
       "sourceSize": 2596,
       "exportedPath": "features/post-processing.html",
       "dependencies": [
@@ -158,307 +173,265 @@
       ]
     },
     "Features/State Management.md": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365149074,
       "sourceSize": 2611,
       "exportedPath": "features/state-management.html",
       "dependencies": []
     },
     "Features/Weather Controller.md": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365149074,
       "sourceSize": 3432,
       "exportedPath": "features/weather-controller.html",
       "dependencies": []
     },
     "Getting Started/Best Practices.md": {
-      "modifiedTime": 1740360027842,
-      "sourceSize": 2949,
+      "modifiedTime": 1740365149074,
+      "sourceSize": 2953,
       "exportedPath": "getting-started/best-practices.html",
       "dependencies": [
         "lib/media/audio_bus.png"
       ]
     },
     "Getting Started/Frequently Asked Questions.md": {
-      "modifiedTime": 1740360027842,
-      "sourceSize": 992,
+      "modifiedTime": 1740365149074,
+      "sourceSize": 997,
       "exportedPath": "getting-started/frequently-asked-questions.html",
       "dependencies": []
     },
     "Getting Started/Project Structure.md": {
-      "modifiedTime": 1740360027842,
-      "sourceSize": 6522,
+      "modifiedTime": 1740365149074,
+      "sourceSize": 6526,
       "exportedPath": "getting-started/project-structure.html",
       "dependencies": [
         "lib/media/collision.png"
       ]
     },
-    "resources/audio_bus.png.import": {
-      "modifiedTime": 1740360027842,
-      "sourceSize": 785,
-      "exportedPath": "resources/audio_bus.png.import",
-      "dependencies": []
-    },
-    "resources/collision.png.import": {
-      "modifiedTime": 1740360027842,
-      "sourceSize": 785,
-      "exportedPath": "resources/collision.png.import",
-      "dependencies": []
-    },
-    "resources/Icarus_Logo.png.import": {
-      "modifiedTime": 1740360027842,
-      "sourceSize": 791,
-      "exportedPath": "resources/icarus_logo.png.import",
-      "dependencies": []
-    },
-    "resources/Image.png": {
-      "modifiedTime": 1740360027842,
-      "sourceSize": 9682,
-      "exportedPath": "resources/image.png",
-      "dependencies": []
-    },
-    "resources/Image 1.png": {
-      "modifiedTime": 1740360027842,
-      "sourceSize": 29610,
-      "exportedPath": "resources/image-1.png",
-      "dependencies": []
-    },
-    "resources/Image 2.png": {
-      "modifiedTime": 1740360027842,
-      "sourceSize": 19990,
-      "exportedPath": "resources/image-2.png",
-      "dependencies": []
-    },
-    "resources/Image 3.png": {
-      "modifiedTime": 1740360027842,
-      "sourceSize": 4866,
-      "exportedPath": "resources/image-3.png",
-      "dependencies": []
-    },
-    "resources/Image 4.png": {
-      "modifiedTime": 1740360027842,
-      "sourceSize": 12571,
-      "exportedPath": "resources/image-4.png",
-      "dependencies": []
-    },
     "DOCUMENTATION.md": {
-      "modifiedTime": 1740360027842,
-      "sourceSize": 6702,
+      "modifiedTime": 1740365324319,
+      "sourceSize": 6748,
       "exportedPath": "documentation.html",
       "dependencies": [
         "resources/icarus_logo.png"
       ]
     },
     "lib/media/image.png": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365149074,
       "sourceSize": 9682,
       "exportedPath": "lib/media/image.png",
       "dependencies": []
     },
     "lib/media/image-1.png": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365149074,
       "sourceSize": 29610,
       "exportedPath": "lib/media/image-1.png",
       "dependencies": []
     },
     "lib/media/image-2.png": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365149074,
       "sourceSize": 19990,
       "exportedPath": "lib/media/image-2.png",
       "dependencies": []
     },
     "lib/media/image-3.png": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365149074,
       "sourceSize": 4866,
       "exportedPath": "lib/media/image-3.png",
       "dependencies": []
     },
     "lib/media/image-4.png": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365149074,
       "sourceSize": 12571,
       "exportedPath": "lib/media/image-4.png",
       "dependencies": []
     },
     "lib/media/audio_bus.png": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365149074,
       "sourceSize": 127212,
       "exportedPath": "lib/media/audio_bus.png",
       "dependencies": []
     },
     "lib/media/collision.png": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365149074,
       "sourceSize": 75591,
       "exportedPath": "lib/media/collision.png",
       "dependencies": []
     },
     "resources/icarus_logo.png": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 14734,
       "exportedPath": "resources/icarus_logo.png",
       "dependencies": []
     },
     "lib/scripts/graph-wasm.wasm": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 23377,
       "exportedPath": "lib/scripts/graph-wasm.wasm",
       "dependencies": []
     },
     "lib/fonts/94f2f163d4b698242fef.otf": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 66800,
       "exportedPath": "lib/fonts/94f2f163d4b698242fef.otf",
       "dependencies": []
     },
     "lib/fonts/72505e6a122c6acd5471.woff2": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 104232,
       "exportedPath": "lib/fonts/72505e6a122c6acd5471.woff2",
       "dependencies": []
     },
     "lib/fonts/2d5198822ab091ce4305.woff2": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 104332,
       "exportedPath": "lib/fonts/2d5198822ab091ce4305.woff2",
       "dependencies": []
     },
     "lib/fonts/c8ba52b05a9ef10f4758.woff2": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 98868,
       "exportedPath": "lib/fonts/c8ba52b05a9ef10f4758.woff2",
       "dependencies": []
     },
     "lib/fonts/cb10ffd7684cd9836a05.woff2": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 106876,
       "exportedPath": "lib/fonts/cb10ffd7684cd9836a05.woff2",
       "dependencies": []
     },
     "lib/fonts/b5f0f109bc88052d4000.woff2": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 105804,
       "exportedPath": "lib/fonts/b5f0f109bc88052d4000.woff2",
       "dependencies": []
     },
     "lib/fonts/cbe0ae49c52c920fd563.woff2": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 106108,
       "exportedPath": "lib/fonts/cbe0ae49c52c920fd563.woff2",
       "dependencies": []
     },
     "lib/fonts/535a6cf662596b3bd6a6.woff2": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 111708,
       "exportedPath": "lib/fonts/535a6cf662596b3bd6a6.woff2",
       "dependencies": []
     },
     "lib/fonts/70cc7ff27245e82ad414.ttf": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 192740,
       "exportedPath": "lib/fonts/70cc7ff27245e82ad414.ttf",
       "dependencies": []
     },
     "lib/fonts/454577c22304619db035.ttf": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 161376,
       "exportedPath": "lib/fonts/454577c22304619db035.ttf",
       "dependencies": []
     },
     "lib/fonts/52ac8f3034507f1d9e53.ttf": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 191568,
       "exportedPath": "lib/fonts/52ac8f3034507f1d9e53.ttf",
       "dependencies": []
     },
     "lib/fonts/05b618077343fbbd92b7.ttf": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 155288,
       "exportedPath": "lib/fonts/05b618077343fbbd92b7.ttf",
       "dependencies": []
     },
     "lib/fonts/4bb6ac751d1c5478ff3a.woff2": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 7876,
       "exportedPath": "lib/fonts/4bb6ac751d1c5478ff3a.woff2",
       "dependencies": []
     },
     "lib/media/6155340132a851f6089e.svg": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 315,
       "exportedPath": "lib/media/6155340132a851f6089e.svg",
       "dependencies": []
     },
     "lib/html/file-tree.html": {
-      "modifiedTime": 1740360027842,
-      "sourceSize": 10624,
+      "modifiedTime": 1740365324319,
+      "sourceSize": 8842,
       "exportedPath": "lib/html/file-tree.html",
       "dependencies": []
     },
     "lib/scripts/webpage.js": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 47290,
       "exportedPath": "lib/scripts/webpage.js",
       "dependencies": []
     },
     "lib/scripts/graph-view.js": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 15519,
       "exportedPath": "lib/scripts/graph-view.js",
       "dependencies": []
     },
     "lib/scripts/graph-wasm.js": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 14021,
       "exportedPath": "lib/scripts/graph-wasm.js",
       "dependencies": []
     },
     "lib/scripts/graph-render-worker.js": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 5179,
       "exportedPath": "lib/scripts/graph-render-worker.js",
       "dependencies": []
     },
     "lib/scripts/tinycolor.js": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 29832,
       "exportedPath": "lib/scripts/tinycolor.js",
       "dependencies": []
     },
     "lib/scripts/pixi.js": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 449509,
       "exportedPath": "lib/scripts/pixi.js",
       "dependencies": []
     },
     "lib/scripts/minisearch.js": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 29422,
       "exportedPath": "lib/scripts/minisearch.js",
       "dependencies": []
     },
     "lib/media/favicon.png": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 1105,
       "exportedPath": "lib/media/favicon.png",
       "dependencies": []
     },
     "lib/scripts/graph-data.js": {
-      "modifiedTime": 1740360027842,
-      "sourceSize": 1535,
+      "modifiedTime": 1740365324319,
+      "sourceSize": 1810,
       "exportedPath": "lib/scripts/graph-data.js",
       "dependencies": []
     },
     "lib/styles/obsidian.css": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 137305,
       "exportedPath": "lib/styles/obsidian.css",
       "dependencies": []
     },
+    "lib/styles/theme.css": {
+      "modifiedTime": 1740365324319,
+      "sourceSize": 9720,
+      "exportedPath": "lib/styles/theme.css",
+      "dependencies": []
+    },
     "lib/styles/global-variable-styles.css": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 262,
       "exportedPath": "lib/styles/global-variable-styles.css",
       "dependencies": []
     },
     "lib/styles/main-styles.css": {
-      "modifiedTime": 1740360027842,
+      "modifiedTime": 1740365324319,
       "sourceSize": 23130,
       "exportedPath": "lib/styles/main-styles.css",
       "dependencies": []
